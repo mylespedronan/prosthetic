@@ -1,0 +1,1 @@
+This folder contains the files for the ESP32 microcontroller.
