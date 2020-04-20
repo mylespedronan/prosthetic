@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.prosthetic.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_device"
+        android:name="com.example.prosthetic.ui.device.DeviceFragment"
+        android:label="@string/menu_device"
+        tools:layout="@layout/fragment_device" />
+
+    <fragment
+        android:id="@+id/nav_terminal"
+        android:name="com.example.prosthetic.ui.terminal.TerminalFragment"
+        android:label="@string/menu_terminal"
+        tools:layout="@layout/fragment_terminal" />
+
+    <fragment
+        android:id="@+id/nav_info"
+        android:name="com.example.prosthetic.ui.info.InfoFragment"
+        android:label="@string/menu_info"
+        tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.example.prosthetic.ui.history.HistoryFragment"
+        android:label="@string/menu_history"
+        tools:layout="@layout/fragment_history" />
+</navigation>

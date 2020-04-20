@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Prosthetic</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Voice Prosthetic</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="sfsu_logo">SFSU Logo</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_device">Connect Device</string>
+    <string name="menu_terminal">Terminal</string>
+    <string name="menu_info">Info</string>
+    <string name="menu_history">History</string>
+
+    <string name="menu_tools">Tools</string>
+    <string name="send_button">Send Button</string>
+</resources>

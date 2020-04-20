@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main Color Schema -->
+    <color name="colorPrimary">#6A42BD</color>
+    <color name="colorPrimaryDark">#52338F</color>
+    <color name="colorAccent">#DD9E04</color>
+
+    <!-- Splash Screen Background -->
+    <color name="backgroundColor">#693CB9</color>
+
+    <!-- Background -->
+    <color name="defaultBackground">#292929</color>
+
+    <!-- Terminal Colors -->
+    <color name="colorRecieveText">#00FF00</color>
+    <color name="colorSendText">#3F51B5</color>
+    <color name="colorStatusText">#00BCD4</color>
+
+    <color name="transparent">#40000000</color>
+    <color name="transparentDark">#E6000000</color>
+</resources>
