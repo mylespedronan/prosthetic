@@ -1,37 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/transparentDark">
 
+    <TextView
+        android:id="@+id/receive_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:freezesText="true"
+        android:layout_weight="130"
+        android:gravity="bottom"
+        android:scrollbars="vertical"
+        android:adjustViewBounds="true"
+        android:scaleType="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="681dp"/>
+        android:background="?android:attr/listDivider"
+        android:layout_height="2dp" />
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/defaultBackground">
+        android:layout_weight="2"
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/send_text"
-            android:layout_width="0dp"
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="text|textNoSuggestions"
-            android:singleLine="true" />
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
-        <ImageButton
-            android:id="@+id/send_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/send_button"
-            app:srcCompat="@drawable/ic_send_white_24dp"/>
+            <Button
+                android:id="@+id/button_shoulder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:text="@string/button_shoulder"/>
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/button_forearm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:text="@string/button_forearm" />
+
+            <Button
+                android:id="@+id/button_wrist"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/button_wrist" />
+            <Button
+                android:id="@+id/button_fingers"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/button_fingers" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <Button
+                android:id="@+id/button_m1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/button_m1" />
+
+            <Button
+                android:id="@+id/button_m2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/button_m2" />
+
+            <Button
+                android:id="@+id/button_m3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/button_m3" />
+
+            <Button
+                android:id="@+id/button_m4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/button_m4" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <Button
+                android:id="@+id/button_voice"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="@string/button_voice" />
+        </TableRow>
+    </TableLayout>
 
 
 </LinearLayout>

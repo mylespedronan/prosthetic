@@ -12,10 +12,6 @@
             android:id="@+id/nav_device"
             android:icon="@drawable/connect_icon"
             android:title="@string/menu_device" />
-        <item
-            android:id="@+id/nav_terminal"
-            android:icon="@drawable/terminal_icon"
-            android:title="@string/menu_terminal" />
     </group>
 
     <item android:title="@string/menu_tools">

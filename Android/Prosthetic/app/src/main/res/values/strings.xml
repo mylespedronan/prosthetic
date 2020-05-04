@@ -1,12 +1,21 @@
 <resources>
+    <!-- App Name   -->
     <string name="app_name">Prosthetic</string>
+
+    <!-- Navigation -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Voice Prosthetic</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="devices">Bluetooth Devices</string>
+
+    <!-- Toolbar Settings -->
     <string name="action_settings">Settings</string>
+
+    <!-- SFSU Logo Title -->
     <string name="sfsu_logo">SFSU Logo</string>
 
+    <!-- Menu   -->
     <string name="menu_home">Home</string>
     <string name="menu_device">Connect Device</string>
     <string name="menu_terminal">Terminal</string>
@@ -15,4 +24,16 @@
 
     <string name="menu_tools">Tools</string>
     <string name="send_button">Send Button</string>
+
+    <!-- Buttons -->
+    <string name="button_shoulder">Shoulder</string>
+    <string name="button_forearm">Forearm</string>
+    <string name="button_wrist">Wrist</string>
+    <string name="button_fingers">Fingers</string>
+    <string name="button_m1">M1</string>
+    <string name="button_m2">M2</string>
+    <string name="button_m3">M3</string>
+    <string name="button_m4">M4</string>
+    <string name="button_voice">Voice</string>
+
 </resources>
