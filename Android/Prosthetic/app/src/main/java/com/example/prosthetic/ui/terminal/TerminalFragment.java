@@ -1,5 +1,6 @@
 package com.example.prosthetic.ui.terminal;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -8,10 +9,18 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.format.DateUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -27,6 +36,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -34,6 +45,12 @@ import com.example.prosthetic.R;
 import com.example.prosthetic.SerialListener;
 import com.example.prosthetic.SerialService;
 import com.example.prosthetic.SerialSocket;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class TerminalFragment extends Fragment implements ServiceConnection, SerialListener {
 
@@ -51,6 +68,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private SerialService service;
     private boolean initialStart = true;
     private Connected connected = Connected.False;
+
+    private String timeStamp;
+    private SimpleDateFormat dateFormat;
+
+    private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+
+    private TextToSpeech myTTS;
+    private SpeechRecognizer mySpeechRecognizer;
+
 
     /*
      * Lifecycle
@@ -71,6 +97,13 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             Log.d("Device Address", "Device Address found");
         }
 
+        // Timestamp
+        dateFormat = new SimpleDateFormat("hh:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT-7"));
+
+        // Initialize Voice Recognition
+        initializeTextToSpeech();
+        initializeSpeechRecognizer();
     }
 
     @Override
@@ -91,7 +124,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             service.attach(this);
             Log.d("Start", "Service start");
         } else {
-            getActivity().startService(new Intent(getActivity(), SerialService.class)); // prevents service destroy on unbind from recreated activity caused by orientation change
+            // prevents service destroy on unbind from recreated
+            // activity caused by orientation change
+            getActivity().startService(new Intent(getActivity(), SerialService.class));
             Log.d("Start", "Get Activity Start");
         }
     }
@@ -199,7 +234,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         buttonVoice = root.findViewById(R.id.button_voice);
 
         // OnClickListener for Voice
-//        buttonVoice.setOnClickListener(this);
+        buttonVoice.setOnClickListener(v -> sendVoice());
 
         return root;
     }
@@ -243,7 +278,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
             String deviceName = device.getName() != null ? device.getName() : device.getAddress();
-            status("connecting...");
+            status("Connecting...");
             connected = Connected.Pending;
             socket = new SerialSocket();
             service.connect(this, "Connected to " + deviceName);
@@ -260,19 +295,56 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         service.disconnect();
         socket.disconnect();
         socket = null;
+        Log.d("Disconnect","Disconnect");
     }
 
     private void send(String str) {
         if(connected != Connected.True) {
-            Toast.makeText(getActivity(), "not connected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Not connected", Toast.LENGTH_SHORT).show();
             return;
         }
         try {
             SpannableStringBuilder spn = new SpannableStringBuilder(str+'\n');
-            spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorSendText)), 0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorSendText)),
+                    0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             receiveText.append(spn);
             byte[] data = (str + newline).getBytes();
             socket.write(data);
+        } catch (Exception e) {
+            onSerialIoError(e);
+        }
+    }
+
+    private void sendVoice() {
+        if(connected != Connected.True) {
+            Toast.makeText(getActivity(), "Not connected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                        Manifest.permission.RECORD_AUDIO)) {
+                    Log.d("Record Audio", "Audio permission ");
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.RECORD_AUDIO}, MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
+                }
+            } else {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+                mySpeechRecognizer.startListening(intent);
+            }
+//            SpannableStringBuilder spn = new SpannableStringBuilder(str+'\n');
+//            spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorSendText)),
+//                    0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            receiveText.append(spn);
+//            byte[] data = (str + newline).getBytes();
+//            socket.write(data);
         } catch (Exception e) {
             onSerialIoError(e);
         }
@@ -285,6 +357,10 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private void status(String str) {
         SpannableStringBuilder spn = new SpannableStringBuilder(str+'\n');
         spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorStatusText)), 0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        timeStamp = dateFormat.format(new Date()) + ": ";
+
+        receiveText.append(timeStamp);
         receiveText.append(spn);
     }
 
@@ -293,13 +369,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
      */
     @Override
     public void onSerialConnect() {
-        status("connected");
+        status("Connected");
         connected = Connected.True;
     }
 
     @Override
     public void onSerialConnectError(Exception e) {
-        status("connection failed: " + e.getMessage());
+        status("Connection failed: " + e.getMessage() + "\n" +
+                "Press back and reconnect to device.");
         disconnect();
     }
 
@@ -310,7 +387,162 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
     @Override
     public void onSerialIoError(Exception e) {
-        status("connection lost: " + e.getMessage());
+        status("Connection lost: " + e.getMessage() + "\n" +
+                "Press back and reconnect to device.");
         disconnect();
     }
+
+    /*
+     * Voice Recognition
+     */
+
+    private void initializeSpeechRecognizer() {
+        if(SpeechRecognizer.isRecognitionAvailable(getActivity())){
+            mySpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
+            mySpeechRecognizer.setRecognitionListener(new RecognitionListener() {
+                @Override
+                public void onReadyForSpeech(Bundle bundle) {
+
+                }
+
+                @Override
+                public void onBeginningOfSpeech() {
+
+                }
+
+                @Override
+                public void onRmsChanged(float v) {
+
+                }
+
+                @Override
+                public void onBufferReceived(byte[] bytes) {
+
+                }
+
+                @Override
+                public void onEndOfSpeech() {
+
+                }
+
+                @Override
+                public void onError(int i) {
+
+                }
+
+                @Override
+                public void onResults(Bundle bundle) {
+                    long startResults = System.nanoTime();
+
+                    List<String> results = bundle.getStringArrayList(
+                            SpeechRecognizer.RESULTS_RECOGNITION
+                    );
+                    processResult(results.get(0), startResults);
+                }
+
+                @Override
+                public void onPartialResults(Bundle bundle) {
+
+                }
+
+                @Override
+                public void onEvent(int i, Bundle bundle) {
+
+                }
+            });
+        }
+    }
+
+    // Recognize voice command
+    private void processResult(String command, long startResults) {
+        command = command.toLowerCase();
+
+        long startTime = System.nanoTime();
+
+        // What is your name?
+        // What is the time?
+        // Open the browser
+
+        if(command.contains("what")) {
+            if (command.contains("your name")) {
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                speak("My name is Koko");
+                send("My name is Koko");
+                System.out.println( "Total Time (Speech: 'What is your name'): " + (System.nanoTime() - startTime));
+            }
+            if (command.contains("time")) {
+                Date now = new Date();
+                String time = DateUtils.formatDateTime(getActivity(), now.getTime(),
+                        DateUtils.FORMAT_SHOW_TIME);
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                speak("The time now is " + time);
+                send("The time now is " + time);
+                System.out.println( "Total Time (Speech: 'What is the time'): " + (System.nanoTime() - startTime));
+            }
+        } else if (command.contains("activate")) {
+            if (command.contains("shoulder")) {
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                speak("Activating shoulder.");
+                send(terminalViewModel.shoulderText);
+                System.out.println( "Total Time (Speech: 'Activate Shoulder'): " + (System.nanoTime() - startTime));
+            }
+            if (command.contains("forearm")) {
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                speak("Activating forearm.");
+                send(terminalViewModel.forearmText);
+                System.out.println( "Total Time (Speech: 'Activate Forearm'): " + (System.nanoTime() - startTime));
+            }
+            if (command.contains("wrist")) {
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                speak("Activating wrist.");
+                send(terminalViewModel.wristText);
+                System.out.println( "Total Time (Speech: 'Activate Wrist'): " + (System.nanoTime() - startTime));
+            }
+            if (command.contains("fingers")) {
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                speak("Activating Fingers.");
+                send(terminalViewModel.fingerText);
+                System.out.println( "Total Time (Speech: 'Activate Fingers'): " + (System.nanoTime() - startTime));
+            }
+        } else if(command.contains("open")) {
+            if(command.contains("browser")) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://google.com"));
+                startActivity(intent);
+            }
+        }
+    }
+
+    private void initializeTextToSpeech() {
+        myTTS = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(myTTS.getEngines().size() == 0){
+                    Toast.makeText(getActivity(), "There is no TTS engine on your device"
+                            , Toast.LENGTH_LONG).show();
+
+                    status("No TTS engine on device");
+                    Log.d("TTS", "No TTS Engine created");
+                } else {
+                    myTTS.setLanguage(Locale.US);
+                    speak("Hello. I am ready.");
+                }
+            }
+        });
+    }
+
+    private void speak(String message) {
+        if(Build.VERSION.SDK_INT >= 21){
+            myTTS.speak(message, TextToSpeech.QUEUE_FLUSH, null, null);
+        } else {
+            myTTS.speak(message, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
+
 }

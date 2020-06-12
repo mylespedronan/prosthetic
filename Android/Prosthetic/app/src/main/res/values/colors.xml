@@ -14,6 +14,7 @@
     <!-- Terminal Colors -->
     <color name="colorRecieveText">#00FF00</color>
     <color name="colorSendText">#3F51B5</color>
+    <color name="colorTimeStamp">#FFFFFF</color>
     <color name="colorStatusText">#00BCD4</color>
 
     <color name="transparent">#40000000</color>

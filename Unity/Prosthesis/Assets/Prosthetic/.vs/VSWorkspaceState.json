@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Entity",
+    "\\Entity\\Script",
+    "\\Entity\\Script\\Monobehaviors",
+    "\\Scripts",
+    "\\Scripts\\Monobehaviors",
+    "\\Scripts\\Monobehaviors\\Commands"
+  ],
+  "SelectedNode": "\\Scripts\\Monobehaviors\\Commands\\Command.cs",
+  "PreviewInSolutionExplorer": false
+}

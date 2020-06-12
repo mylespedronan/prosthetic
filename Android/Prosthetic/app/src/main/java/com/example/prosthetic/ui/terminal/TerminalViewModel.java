@@ -4,23 +4,34 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import javax.security.auth.callback.Callback;
 
 public class TerminalViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    public String shoulderText;
+    public String forearmText;
+    public String wristText;
+    public String fingerText;
 
-    public String shoulderText = "Shoulder";
-    public String forearmText = "Forearm";
-    public String wristText = "Wrist";
-    public String fingerText = "Fingers";
+    public String activateShoulder;
+    public String activateForearm;
+    public String activateWrist;
+    public String activateFinger;
 
     public TerminalViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is terminal fragment");
-    }
 
-    public LiveData<String> getText() {
-        return mText;
+        shoulderText = "Shoulder";
+        forearmText = "Forearm";
+        wristText = "Wrist";
+        fingerText = "Fingers";
+
+        activateShoulder = "Activate Shoulder";
+        activateForearm = "Activate Forearm";
+        activateWrist = "Activate Wrist";
+        activateFinger = "Activate Finger";
     }
 }

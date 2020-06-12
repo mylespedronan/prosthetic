@@ -28,10 +28,9 @@
         tools:layout="@layout/fragment_device" >
         <action
             android:id="@+id/deviceConfirmation"
-            android:name="deviceConfirmation"
             app:destination="@id/nav_terminal"
             android:defaultValue="@null" />
-        <argument android:name="myArg" />
+        <argument android:name="deviceConfirmation" />
     </fragment>
 
     <fragment
