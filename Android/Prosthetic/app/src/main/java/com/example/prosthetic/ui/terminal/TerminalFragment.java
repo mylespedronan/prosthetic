@@ -482,6 +482,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 System.out.println( "Total Time (Speech: 'What is the time'): " + (System.nanoTime() - startTime));
             }
         } else if (command.contains("activate")) {
+            // Prosthetic components
             if (command.contains("shoulder")) {
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
@@ -510,6 +511,164 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 send(terminalViewModel.fingerText);
                 System.out.println( "Total Time (Speech: 'Activate Fingers'): " + (System.nanoTime() - startTime));
             }
+
+            // Hand Commands //
+            // Large Diameter Grasp
+            if (command.contains("large")) {
+                if (command.contains("diameter")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Large Diameter Grasp.");
+                    send(terminalViewModel.largeDiameter);
+                    System.out.println( "Total Time (Speech: 'Activate Large Diameter Grasp'): " + (System.nanoTime() - startTime));
+                }
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Large Diameter Reset.");
+                    send(terminalViewModel.largeDiameterReset);
+                    System.out.println( "Total Time (Speech: 'Activate Large Diameter Reset'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            // Small Diameter Grasp
+            if (command.contains("small")) {
+                if (command.contains("diameter")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Small Diameter Grasp.");
+                    send(terminalViewModel.smallDiameter);
+                    System.out.println( "Total Time (Speech: 'Activate Small Diameter Grasp'): " + (System.nanoTime() - startTime));
+                }
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Small Diameter Reset.");
+                    send(terminalViewModel.smallDiameterReset);
+                    System.out.println( "Total Time (Speech: 'Activate Small Diameter Reset'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            // Palmar Pinch Grasp
+            if (command.contains("palmar")) {
+                if (command.contains("pinch")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Palmar Pinch.");
+                    send(terminalViewModel.palmarPinch);
+                    System.out.println( "Total Time (Speech: 'Activate Palmar Pinch'): " + (System.nanoTime() - startTime));
+                }
+            }
+            if (command.contains("pinch")){
+                if (command.contains("reset")) {
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Palmar Pinch Reset.");
+                    send(terminalViewModel.palmarPinchReset);
+                    System.out.println("Total Time (Speech: 'Activate Palmar Pinch Reset'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            // Sphere/Ball Grasp
+            if (command.contains("ball")) {
+                if (command.contains("grasp")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Ball Grasp.");
+                    send(terminalViewModel.ball);
+                    System.out.println( "Total Time (Speech: 'Activate Ball Grasp'): " + (System.nanoTime() - startTime));
+                }
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Ball Reset.");
+                    send(terminalViewModel.ballReset);
+                    System.out.println( "Total Time (Speech: 'Activate Ball Reset'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            // Lateral Grasp
+            if (command.contains("lateral")) {
+                if (command.contains("grasp")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Lateral Grasp.");
+                    send(terminalViewModel.lateral);
+                    System.out.println( "Total Time (Speech: 'Activate Lateral Grasp'): " + (System.nanoTime() - startTime));
+                }
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println( "Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Lateral Grasp Reset.");
+                    send(terminalViewModel.lateralReset);
+                    System.out.println( "Total Time (Speech: 'Activate Lateral Grasp Reset'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            // Thumb One
+            if (command.contains("one")) {
+                if (command.contains("grasp")) {
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Thumb One.");
+                    send(terminalViewModel.thumb1);
+                    System.out.println("Total Time (Speech: 'Activate Thumb One'): " + (System.nanoTime() - startTime));
+                }
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Thumb One Reset.");
+                    send(terminalViewModel.thumb1Reset);
+                    System.out.println("Total Time (Speech: 'Activate Thumb One Reset'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            // Thumb Two
+            if (command.contains("to")) {
+                if (command.contains("grasp")) {
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Thumb Two.");
+                    send(terminalViewModel.thumb2);
+                    System.out.println("Total Time (Speech: 'Activate Thumb Two.'): " + (System.nanoTime() - startTime));
+                }
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Thumb Two Reset.");
+                    send(terminalViewModel.thumb2Reset);
+                    System.out.println("Total Time (Speech: 'Activate Thumb Two Reset.'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+
+            if (command.contains("three")) {
+                if (command.contains("grasp")) {
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Thumb Three.");
+                    send(terminalViewModel.thumb3);
+                    System.out.println("Total Time (Speech: 'Activate Thumb Three.'): " + (System.nanoTime() - startTime));
+                }
+                //
+                if (command.contains("reset")){
+                    System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                    System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                    speak("Activating Thumb Three Reset.");
+                    send(terminalViewModel.thumb3Reset);
+                    System.out.println("Total Time (Speech: 'Activate Thumb Three Reset.'): " + (System.nanoTime() - startTime));
+                }
+            }
+
+            if (command.contains("grip reset")) {
+                System.out.println("Begin Time: " + (System.nanoTime() - startResults));
+                System.out.println("Total Time: " + (System.nanoTime() - startTime));
+                speak("Activating Reset.");
+                send(terminalViewModel.reset);
+                System.out.println("Total Time (Speech: 'Activate Reset.'): " + (System.nanoTime() - startTime));
+            }
+
+
         } else if(command.contains("open")) {
             if(command.contains("browser")) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,

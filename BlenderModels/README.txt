@@ -6,3 +6,7 @@ The models have room for improvement with rigging and weight painting in order t
 the deformation of the mesh. 
 
 The models imported are in the 3D Models Folder.
+
+CGC Classic: Rigged Fingers used
+https://www.blendswap.com/blend/22357
+Creator: cgcookie
