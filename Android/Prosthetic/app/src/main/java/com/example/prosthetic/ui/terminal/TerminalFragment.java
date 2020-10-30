@@ -224,7 +224,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         buttonM3 = root.findViewById(R.id.button_m3);
         buttonM4 = root.findViewById(R.id.button_m4);
 
-        // OnClickListener for Macros
+        // OnClickListener for Macros [Future Use]
 //        buttonM1.setOnClickListener(this);
 //        buttonM2.setOnClickListener(this);
 //        buttonM3.setOnClickListener(this);
@@ -339,12 +339,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
                 mySpeechRecognizer.startListening(intent);
             }
-//            SpannableStringBuilder spn = new SpannableStringBuilder(str+'\n');
-//            spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorSendText)),
-//                    0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//            receiveText.append(spn);
-//            byte[] data = (str + newline).getBytes();
-//            socket.write(data);
         } catch (Exception e) {
             onSerialIoError(e);
         }
@@ -465,6 +459,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         if(command.contains("what")) {
             if (command.contains("your name")) {
+                System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                 speak("My name is Koko");
@@ -475,6 +470,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 Date now = new Date();
                 String time = DateUtils.formatDateTime(getActivity(), now.getTime(),
                         DateUtils.FORMAT_SHOW_TIME);
+                System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                 speak("The time now is " + time);
@@ -484,6 +480,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         } else if (command.contains("activate")) {
             // Prosthetic components
             if (command.contains("shoulder")) {
+                System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                 speak("Activating shoulder.");
@@ -491,6 +488,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 System.out.println( "Total Time (Speech: 'Activate Shoulder'): " + (System.nanoTime() - startTime));
             }
             if (command.contains("forearm")) {
+                System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                 speak("Activating forearm.");
@@ -498,6 +496,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 System.out.println( "Total Time (Speech: 'Activate Forearm'): " + (System.nanoTime() - startTime));
             }
             if (command.contains("wrist")) {
+                System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                 speak("Activating wrist.");
@@ -505,6 +504,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 System.out.println( "Total Time (Speech: 'Activate Wrist'): " + (System.nanoTime() - startTime));
             }
             if (command.contains("fingers")) {
+                System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                 speak("Activating Fingers.");
@@ -516,6 +516,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Large Diameter Grasp
             if (command.contains("large")) {
                 if (command.contains("diameter")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Large Diameter Grasp.");
@@ -523,6 +524,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     System.out.println( "Total Time (Speech: 'Activate Large Diameter Grasp'): " + (System.nanoTime() - startTime));
                 }
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Large Diameter Reset.");
@@ -534,6 +536,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Small Diameter Grasp
             if (command.contains("small")) {
                 if (command.contains("diameter")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Small Diameter Grasp.");
@@ -541,6 +544,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     System.out.println( "Total Time (Speech: 'Activate Small Diameter Grasp'): " + (System.nanoTime() - startTime));
                 }
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Small Diameter Reset.");
@@ -552,6 +556,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Palmar Pinch Grasp
             if (command.contains("palmar")) {
                 if (command.contains("pinch")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Palmar Pinch.");
@@ -561,6 +566,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
             if (command.contains("pinch")){
                 if (command.contains("reset")) {
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Palmar Pinch Reset.");
@@ -572,6 +578,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Sphere/Ball Grasp
             if (command.contains("ball")) {
                 if (command.contains("grasp")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Ball Grasp.");
@@ -579,6 +586,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     System.out.println( "Total Time (Speech: 'Activate Ball Grasp'): " + (System.nanoTime() - startTime));
                 }
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Ball Reset.");
@@ -590,6 +598,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Lateral Grasp
             if (command.contains("lateral")) {
                 if (command.contains("grasp")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Lateral Grasp.");
@@ -597,6 +606,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     System.out.println( "Total Time (Speech: 'Activate Lateral Grasp'): " + (System.nanoTime() - startTime));
                 }
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println( "Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Lateral Grasp Reset.");
@@ -608,6 +618,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Thumb One
             if (command.contains("one")) {
                 if (command.contains("grasp")) {
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Thumb One.");
@@ -615,6 +626,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     System.out.println("Total Time (Speech: 'Activate Thumb One'): " + (System.nanoTime() - startTime));
                 }
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Thumb One Reset.");
@@ -626,6 +638,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             // Thumb Two
             if (command.contains("to")) {
                 if (command.contains("grasp")) {
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Thumb Two.");
@@ -633,6 +646,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     System.out.println("Total Time (Speech: 'Activate Thumb Two.'): " + (System.nanoTime() - startTime));
                 }
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Thumb Two Reset.");
@@ -644,6 +658,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
             if (command.contains("three")) {
                 if (command.contains("grasp")) {
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Thumb Three.");
@@ -652,6 +667,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 }
                 //
                 if (command.contains("reset")){
+                    System.out.println("Start Results: " + (startResults * Math.pow(10, 9)));
                     System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                     System.out.println("Total Time: " + (System.nanoTime() - startTime));
                     speak("Activating Thumb Three Reset.");
@@ -661,6 +677,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             }
 
             if (command.contains("grip reset")) {
+                System.out.println("Start Results: " + (startResults));
                 System.out.println("Begin Time: " + (System.nanoTime() - startResults));
                 System.out.println("Total Time: " + (System.nanoTime() - startTime));
                 speak("Activating Reset.");
@@ -693,6 +710,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                     speak("Hello. I am ready.");
                 }
             }
+
+
         });
     }
 

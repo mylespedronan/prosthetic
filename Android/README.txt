@@ -19,6 +19,7 @@ Voice Commands:
 ---		Reset
 ---	Palmar
 ---		Pinch
+---	Pinch
 ---		Reset
 ---	Sphere
 ---		Grasp

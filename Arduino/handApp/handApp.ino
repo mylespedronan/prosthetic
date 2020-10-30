@@ -32,15 +32,16 @@ void setup() {
   }
   
   Serial.println("The device started, now you can pair it with bluetooth!");
+
 }
 
-void loop() {
+void loop() {  
   if (Serial.available()) {
     SerialBT.write(Serial.read());
   }
-
+ 
   recvWithEndMarker();
-  showNewData();
+  showNewData();  
 }
 
 void recvWithEndMarker() {
@@ -74,7 +75,7 @@ void showNewData() {
       Serial.flush();  
     } else if (strncmp(receivedChars, "small", 5) == 0){
       Serial.write("2");     
-      Serial.flush();           
+      Serial.flush();       
     } else if (strncmp(receivedChars, "palmar", 6) == 0){
       Serial.write("3");     
       Serial.flush();
@@ -93,11 +94,10 @@ void showNewData() {
     } else if (strncmp(receivedChars, "thumb3", 6) == 0){
       Serial.write("8");     
       Serial.flush();
-
     } else if (strncmp(receivedChars, "resetgrip", 9) == 0){
       Serial.write("9");
       Serial.flush();
-
+      
     // Resets
     } else if (strncmp(receivedChars, "resetlarge", 10) == 0){
       // 97
