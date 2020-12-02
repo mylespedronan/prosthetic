@@ -2,8 +2,15 @@ package com.example.prosthetic.ui.terminal;
 
 import androidx.lifecycle.ViewModel;
 
+
+/*
+ *  For future development if needed
+ *  This file contains the view model for the History setting option
+ */
+
 public class TerminalViewModel extends ViewModel {
 
+    // String commands
     public String shoulderText;
     public String forearmText;
     public String wristText;
@@ -33,7 +40,6 @@ public class TerminalViewModel extends ViewModel {
     public String thumb3Reset;
 
     public String reset;
-
 
     public TerminalViewModel() {
         // Prosthetic

@@ -17,6 +17,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.prosthetic.R;
 
+/*
+ *  This file contains the Home fragment for the Home page
+ */
+
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;

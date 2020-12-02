@@ -131,7 +131,13 @@ void showNewData() {
       // 104
       Serial.write("h");     
       Serial.flush();
+    } else if (strncmp(receivedChars, "handwave", 8) == 0){
+      // 105
+      Serial.write("i");
+      Serial.flush();
     }
+
+
       newData = false;
   }
 }

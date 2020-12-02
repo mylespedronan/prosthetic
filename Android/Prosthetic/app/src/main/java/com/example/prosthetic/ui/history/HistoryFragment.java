@@ -14,6 +14,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.prosthetic.R;
 
+/*
+ *  For future development if needed
+ *  This file contains the History Fragment for the History setting option
+ */
+
 public class HistoryFragment extends Fragment {
 
     private HistoryViewModel historyViewModel;

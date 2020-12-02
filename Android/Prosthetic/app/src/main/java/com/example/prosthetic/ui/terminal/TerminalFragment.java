@@ -52,6 +52,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+
+/*
+ *  This file contains the e terminal fragment
+ */
+
 public class TerminalFragment extends Fragment implements ServiceConnection, SerialListener {
 
     private TerminalViewModel terminalViewModel;
@@ -456,6 +461,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         // What is your name?
         // What is the time?
         // Open the browser
+
+        if(command.contains("hand")){
+            if(command.contains("wave")){
+                speak("Hand wave");
+                send("handwave");
+                System.out.println("Hand");
+            }
+        }
+
 
         if(command.contains("what")) {
             if (command.contains("your name")) {

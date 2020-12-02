@@ -23,6 +23,10 @@ import com.example.prosthetic.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/*
+ *   This file retrieves a list of Bluetooth devices and lists them in alphabetical order
+ */
+
 public class DeviceFragment extends ListFragment {
 
     private BluetoothAdapter bluetoothAdapter;

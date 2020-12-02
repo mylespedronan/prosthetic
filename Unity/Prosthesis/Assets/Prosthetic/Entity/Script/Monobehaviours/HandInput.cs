@@ -21,6 +21,7 @@ using UnityEngine;
 public class HandInput : MonoBehaviour
 {
     public GameObject hand;
+    private Animator animator;
 
     // Dictionary
     public Dictionary<int, string> myDict = new Dictionary<int, string>();
@@ -40,6 +41,8 @@ public class HandInput : MonoBehaviour
     Stopwatch st = new Stopwatch();
 
     private void Start() {
+      animator = GetComponent<Animator>();
+
       // Reset Key
       resetKey = 0;
       keyValue = 0;
@@ -383,6 +386,12 @@ public class HandInput : MonoBehaviour
         st.Stop();
         UnityEngine.Debug.Log ("Time taken: " + st.Elapsed);
         st.Reset();
+      }
+
+      // Hand Wave
+      if(message == 105){
+        UnityEngine.Debug.Log("Hand Wave");
+        animator.GetComponent<Animator>().Play("Hand|Wave");
       }
 
       // Reset message

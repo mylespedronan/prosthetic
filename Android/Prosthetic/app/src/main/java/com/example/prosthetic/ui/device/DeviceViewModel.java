@@ -4,6 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+/*
+ *   This file contains the view model for the Device Fragment
+ */
+
+
 public class DeviceViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;

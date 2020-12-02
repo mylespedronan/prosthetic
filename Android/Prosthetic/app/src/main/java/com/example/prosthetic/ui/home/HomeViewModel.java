@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+/*
+ *  This file contains the view model for the Home page
+ */
+
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
